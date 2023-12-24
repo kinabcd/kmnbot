@@ -8,7 +8,7 @@ import (
 type Box []Kmn
 
 func (box Box) Get(name string) *Kmn {
-	return box.FirstName([]string{name})
+	return box.Filter(func(kmn Kmn) bool { return kmn.Name == name }).First()
 }
 
 func (box Box) First() *Kmn {
@@ -19,24 +19,6 @@ func (box Box) First() *Kmn {
 	}
 }
 
-func (box Box) FirstFunc(condi func(kmn Kmn) bool) *Kmn {
-	for _, v := range box {
-		if condi(v) {
-			return &v
-		}
-	}
-	return nil
-}
-func (box Box) FirstName(names []string) *Kmn {
-	return box.FirstFunc(func(kmn Kmn) bool {
-		for _, wanted := range names {
-			if kmn.Name == wanted {
-				return true
-			}
-		}
-		return false
-	})
-}
 func (box Box) Filter(condi func(kmn Kmn) bool) Box {
 	r := []Kmn{}
 	for _, kmn := range box {
