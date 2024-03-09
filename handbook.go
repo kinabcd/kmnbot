@@ -8,10 +8,16 @@ import (
 )
 
 type HandbookItem struct {
-	Level  int64
-	Exp    int64
-	Type   string
+	// 滿級等級
+	Level int64
+	// 滿級時的經驗值
+	Exp int64
+	// 必為 紅, 藍, 黃, 綠, 黑, 白 其中之一
+	Type string
+	// 分類為道具或召喚物時為 true
 	IsItem bool
+	// 機器狼分類
+	Family string
 }
 
 //go:embed handbook.txt
@@ -40,6 +46,7 @@ func init() {
 			Level:  level,
 			Type:   splited[1],
 			IsItem: splited[5] == "道具" || splited[5] == "召喚物",
+			Family: splited[5],
 		}
 		Handbook[splited[0]] = data
 	}

@@ -38,13 +38,13 @@ func TestSort(t *testing.T) {
 }
 func TestFilter(t *testing.T) {
 	f1 := fakeBox()
-	f1_1 := f1.FilterName([]string{"機器冥狼神", "逐星者‧占卜師機器狼", "藥物論‧藥師機器狼", "黑暗紳士‧伯爵機器狼"})
+	f1_1 := f1.FilterName("機器冥狼神", "逐星者‧占卜師機器狼", "藥物論‧藥師機器狼", "黑暗紳士‧伯爵機器狼")
 	assert(t, 4, f1_1.Size())
-	f1_1_1 := f1_1.FilterName([]string{"NotExisted", "逐星者‧占卜師機器狼", "機器冥狼神", "星圖炸彈"})
+	f1_1_1 := f1_1.FilterName("NotExisted", "逐星者‧占卜師機器狼", "機器冥狼神", "星圖炸彈")
 	assert(t, 2, f1_1_1.Size())
-	f1_2 := f1.FilterName([]string{""})
+	f1_2 := f1.FilterName("")
 	assert(t, 0, f1_2.Size())
-	f1_3 := f1.FilterName([]string{"NotExisted", "逐星者‧占卜師機器狼", "機器冥狼神", "星圖炸彈"})
+	f1_3 := f1.FilterName("NotExisted", "逐星者‧占卜師機器狼", "機器冥狼神", "星圖炸彈")
 	assert(t, 3, f1_3.Size())
 	f1_4 := f1.Filter(func(kmn kmnbot.Kmn) bool { return !kmn.FullLevel && kmn.Data().Exp == 1 })
 	assert(t, 3, f1_4.Size())

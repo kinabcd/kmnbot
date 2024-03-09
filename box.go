@@ -29,14 +29,14 @@ func (box Box) Filter(condi func(kmn Kmn) bool) Box {
 	return r
 
 }
-func (box Box) FilterName(names []string) Box {
+func (box Box) FilterName(names ...string) Box {
 	w := make(map[string]bool)
 	for _, wanted := range names {
 		w[wanted] = true
 	}
 	return box.Filter(func(kmn Kmn) bool { return w[kmn.Name] })
 }
-func (box Box) FilterNotName(names []string) Box {
+func (box Box) FilterNotName(names ...string) Box {
 	w := make(map[string]bool)
 	for _, droped := range names {
 		w[droped] = true
@@ -49,11 +49,16 @@ func (box Box) FilterNotFullRank() Box {
 func (box Box) FilterNotFullLevel() Box {
 	return box.Filter(func(kmn Kmn) bool { return !kmn.FullLevel })
 }
+
+// -1:未知, 0:普通, 1:不錯, 2:太完美了!
+func (box Box) FilterEvaluate(e ...int64) Box {
+	return box.Filter(func(kmn Kmn) bool { return slices.Contains(e, kmn.Evaluate) })
+}
 func (box Box) Kmns() Box {
-	return box.FilterNotName(ItemNames)
+	return box.FilterNotName(ItemNames...)
 }
 func (box Box) Items() Box {
-	return box.FilterName(ItemNames)
+	return box.FilterName(ItemNames...)
 }
 func (box Box) ItemRank() int64 {
 	if items := box.Items(); len(items) > 0 {

@@ -10,14 +10,22 @@ import (
 )
 
 type Kmn struct {
-	Name      string
-	Star      int64
-	Level     int64
+	Name string
+	// 稀有度
+	Star int64
+	// 等級
+	Level int64
+	// 若 Level 滿時為 true，滿級等級可從 HandbookItem.Level 取得
 	FullLevel bool
-	Rank      int64
-	FullRank  bool
-	Type      string
-	Evaluate  int64
+	// 階級
+	Rank int64
+	// 若 Rank 為 100 則為 true
+	FullRank bool
+	// 必為 紅, 藍, 黃, 綠, 黑, 白 其中之一
+	Type string
+	// -1:未知, 0:普通, 1:不錯, 2:太完美了!
+	// 體質未知的機器狼需要使用「靈能者機器狼」系列的技能「靈腦檢驗」使其顯示
+	Evaluate int64
 }
 
 func (k Kmn) Data() HandbookItem {
