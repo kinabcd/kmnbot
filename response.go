@@ -3,12 +3,18 @@ package kmnbot
 import "regexp"
 
 type Response struct {
-	IsHere     bool
-	Rin        string
-	Rainbow    string
+	// 是否有Add過回應
+	IsHere bool
+	// 亂入率
+	Rin string
+	// 彩虹齒輪
+	Rainbow string
+	// 明季節
 	NextSeason string
-	Search     []string
-	Other      []string
+	// 探索結果
+	Search []string
+	// 其他所得，例如活動贈禮、工作所得等
+	Other []string
 }
 
 var rinRegexp = []*regexp.Regexp{
