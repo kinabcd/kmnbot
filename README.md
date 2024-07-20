@@ -10,7 +10,7 @@ kmnbot 是Plurk遊戲機器狼的golang Parser
 --
 從機器狼Server下載最新的BOX資料
 
-其中plurk account是Plruk網址中最後一段，例如: https://www.plurk.com/**kinabcd**
+其中plurk account是Plruk網址中最後一段，例如 https://www.plurk.com/kinabcd 中的 kinabcd
 ```golang
 var box Box = kmnbot.FetchBox("plurk account")
 ```
